@@ -4,7 +4,7 @@ var expect = require('chai').expect;
 var FlippersAPI = require('./');
 var testApiMethod = require('../_test');
 
-describe('SuiteAPI Services endpoint', function() {
+describe('SuiteAPI Flippers endpoint', function() {
 
   describe('#isOn', function() {
     testApiMethod(FlippersAPI, 'isOn').withArgs({
