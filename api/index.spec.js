@@ -2,13 +2,6 @@
 
 var SuiteRequest = require('escher-suiteapi-js');
 var SuiteAPI = require('./');
-var AdministratorAPI = require('./endpoints/administrator');
-var ContactAPI = require('./endpoints/contact');
-var EmailAPI = require('./endpoints/email');
-var SegmentAPI = require('./endpoints/segment');
-var LanguageAPI = require('./endpoints/language');
-var ExternalEventAPI = require('./endpoints/externalevent');
-var SettingsAPI = require('./endpoints/settings');
 var Request = require('./../lib/api-request');
 var expect = require('chai').expect;
 var SuiteRequestOptions = SuiteRequest.Options;
@@ -152,13 +145,6 @@ describe('SuiteApi', function() {
         rejectUnauthorized: false
       };
 
-      this.sandbox.stub(AdministratorAPI, 'create').returns('FromAdministratorEndpointStub');
-      this.sandbox.stub(ContactAPI, 'create').returns('FromContactEndpointStub');
-      this.sandbox.stub(EmailAPI, 'create').returns('FromEmailEndpointStub');
-      this.sandbox.stub(SegmentAPI, 'create').returns('FromSegmentEndpointStub');
-      this.sandbox.stub(LanguageAPI, 'create').returns('FromLanguageEndpointStub');
-      this.sandbox.stub(ExternalEventAPI, 'create').returns('FromExternalEventEndpointStub');
-      this.sandbox.stub(SettingsAPI, 'create').returns('FromSettingsEndpointStub');
       var suiteRequestStub = this.sandbox.stub(SuiteRequest, 'create');
       suiteRequestStub.withArgs(apiKey, apiSecret, 'SuiteRequestOptionsStub').returns('SuiteRequestStub');
       suiteRequestStub.withArgs(apiKey, apiSecret, 'SuiteServiceRequestOptionsStub').returns('SuiteServiceRequestStub');
@@ -167,41 +153,6 @@ describe('SuiteApi', function() {
       sdk = SuiteAPI.create(options);
     });
 
-
-    it('should have an SDK object with Administrator endpoint', function() {
-      expect(sdk.administrator).to.eql('FromAdministratorEndpointStub');
-      expect(AdministratorAPI.create).to.have.been.calledWith(fakeRequest, options);
-    });
-
-
-    it('should have an SDK object with Contact endpoint', function() {
-      expect(sdk.contact).to.eql('FromContactEndpointStub');
-      expect(ContactAPI.create).to.have.been.calledWith(fakeRequest);
-    });
-
-
-    it('should have an SDK object with Segment endpoint', function() {
-      expect(sdk.segment).to.eql('FromSegmentEndpointStub');
-      expect(SegmentAPI.create).to.have.been.calledWith(fakeRequest);
-    });
-
-
-    it('should have an SDK object with Language endpoint', function() {
-      expect(sdk.language).to.eql('FromLanguageEndpointStub');
-      expect(LanguageAPI.create).to.have.been.calledWith(fakeRequest);
-    });
-
-
-    it('should have an SDK object with ExternalEvent endpoint', function() {
-      expect(sdk.externalEvent).to.eql('FromExternalEventEndpointStub');
-      expect(ExternalEventAPI.create).to.have.been.calledWith(fakeRequest);
-    });
-
-
-    it('should have an SDK object with Settings endpoint', function() {
-      expect(sdk.settings).to.eql('FromSettingsEndpointStub');
-      expect(SettingsAPI.create).to.have.been.calledWith(fakeRequest);
-    });
 
   });
 
