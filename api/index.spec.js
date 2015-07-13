@@ -5,7 +5,6 @@ var SuiteAPI = require('./');
 var FlipperAPI = require('./endpoints/flipper');
 var FeatureAPI = require('./endpoints/feature');
 var Request = require('./../lib/api-request');
-var ServiceRequest = require('../lib/service-api-request');
 var expect = require('chai').expect;
 var SuiteRequestOptions = SuiteRequest.Options;
 

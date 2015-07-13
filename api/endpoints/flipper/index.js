@@ -16,16 +16,19 @@ util.inherits(Flipper, Base);
 _.extend(Flipper.prototype, {
 
   isOn: function(payload, options) {
-    logger.log('flipper_isOn');
+    return this._requireParameters(payload, ['flipper_id']).then(function() {
+      logger.log('flipper_is_on');
 
-    return this._request.get(
-      this._getCustomerId(options),
-      '/flippers/' + payload.flipperId,
-      options
-    );
+      return this._request.get(
+          this._getCustomerId(options),
+          util.format('flippers/%s', payload.flipper_id),
+          options
+      );
+    }.bind(this));
   }
 
 });
+
 
 Flipper.create = function(request, options) {
   return new Flipper(request, options);
