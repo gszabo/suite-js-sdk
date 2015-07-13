@@ -3,6 +3,7 @@
 var SuiteRequest = require('escher-suiteapi-js');
 var SuiteAPI = require('./');
 var FlipperAPI = require('./endpoints/flipper');
+var FeatureAPI = require('./endpoints/feature');
 var Request = require('./../lib/api-request');
 var ServiceRequest = require('../lib/service-api-request');
 var expect = require('chai').expect;
@@ -154,6 +155,7 @@ describe('SuiteApi', function() {
       };
 
       this.sandbox.stub(FlipperAPI, 'create').returns('FromFlipperEndpointStub');
+      this.sandbox.stub(FeatureAPI, 'create').returns('FromFeatureEndpointStub');
       this.sandbox.stub(SuiteRequestOptions, 'createForServiceApi').withArgs(environment).returns('SuiteServiceRequestOptionsStub');
       var suiteRequestStub = this.sandbox.stub(SuiteRequest, 'create');
       suiteRequestStub.withArgs(apiKey, apiSecret, 'SuiteRequestOptionsStub').returns('SuiteRequestStub');
@@ -171,6 +173,11 @@ describe('SuiteApi', function() {
       expect(FlipperAPI.create).to.have.been.calledWith(fakeServiceRequest);
     });
 
+
+    it('should have an SDK object with Feature endpoint', function() {
+      expect(sdk.feature).to.eql('FromFeatureEndpointStub');
+      expect(FeatureAPI.create).to.have.been.calledWith(fakeServiceRequest);
+    });
 
   });
 

@@ -5,6 +5,7 @@ var SuiteRequestOptions = SuiteRequest.Options;
 var ServiceRequest = require('../lib/service-api-request');
 var ApiRequest = require('./../lib/api-request');
 var FlipperAPI = require('./endpoints/flipper');
+var FeatureAPI = require('./endpoints/feature');
 var KeyPool = require('escher-keypool');
 var _ = require('lodash');
 
@@ -16,6 +17,7 @@ var SuiteAPI = function(options) {
   this._serviceRequest = this._createServiceRequest(options);
 
   this.flipper = FlipperAPI.create(this._serviceRequest);
+  this.feature = FeatureAPI.create(this._serviceRequest);
 
   this.environment = options.environment;
 };
@@ -83,4 +85,5 @@ SuiteAPI.createWithCache = function(cacheId, options) {
 
 module.exports = SuiteAPI;
 module.exports.Flipper = FlipperAPI;
+module.exports.Feature = FeatureAPI;
 module.exports.SuiteRequestError = SuiteRequest.Error;
