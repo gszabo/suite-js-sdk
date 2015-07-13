@@ -1,30 +1,34 @@
 'use strict';
 
+var util = require('util');
 var logger = require('logentries-logformat')('suite-sdk');
+var _ = require('lodash');
 
+var Base = require('../_base');
 
-var Flipper = function(request) {
+var Flipper = function(request, options) {
+  Base.call(this, options);
   this._request = request;
 };
 
-Flipper.prototype = {
+util.inherits(Flipper, Base);
 
-  isOn: function(customerId, flipperId) {
+_.extend(Flipper.prototype, {
+
+  isOn: function(payload, options) {
     logger.log('flipper_isOn');
-    return this._request.get('/customers/' + customerId + '/flippers/' + flipperId)
-      .then(function(response) {
-        return response.flipper.is_on;
-      }.bind(this))
-      .catch(function(error) {
-        logger.log('flipper-error', { error: error, stack: error.stack });
-        return false;
-      });
+
+    return this._request.get(
+      this._getCustomerId(options),
+      '/flippers/' + payload.flipperId,
+      options
+    );
   }
 
-};
+});
 
-Flipper.create = function(request) {
-  return new Flipper(request);
+Flipper.create = function(request, options) {
+  return new Flipper(request, options);
 };
 
 module.exports = Flipper;
