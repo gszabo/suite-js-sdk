@@ -1,70 +1,17 @@
 'use strict';
 
-var FlipperAPI = require('./index');
-var sinon = require('sinon');
 var expect = require('chai').expect;
+var FlippersAPI = require('./');
+var testApiMethod = require('../_test');
 
-describe('Suite Service Flipper', function() {
-  var request;
-  var flipper;
+describe('SuiteAPI Services endpoint', function() {
 
-  describe('Flipper ON', function() {
+  describe('#isOn', function() {
+    testApiMethod(FlippersAPI, 'isOn').withArgs({
+      flipper_id: '12'
+    }).shouldGetResultFromEndpoint('/flippers/12');
 
-    it('should check flipper status with a Suite api call', function* () {
-      requestPromiseRespondWith({ flipper: { is_on: true } });
-      var returnValue = yield flipper.isOn(1, 'test');
-
-      expect(request.get).to.have.been.calledWithMatch('/customers/1/flippers/test');
-      expect(returnValue).to.eql(true);
-    });
-
+    testApiMethod(FlippersAPI, 'isOn').withArgs({}).shouldThrowMissingParameterError('flipper_id');
   });
-
-
-  describe('Flipper OFF', function() {
-
-    it('should check flipper status with a Suite api call', function* () {
-      requestPromiseRespondWith({ flipper: { is_on: false } });
-      var returnValue = yield flipper.isOn(2, 'test');
-
-      expect(request.get).to.have.been.calledWithMatch('/customers/2/flippers/test');
-      expect(returnValue).to.eql(false);
-    });
-
-  });
-
-
-  it('should log errors and return false', function* () {
-    requestPromiseRejectWith(new Error('404'));
-    var returnValue = yield flipper.isOn(1, 'test');
-
-    expect(request.get).to.have.been.calledWithMatch('/customers/1/flippers/test');
-    expect(returnValue).to.eql(false);
-  });
-
-
-  var requestPromiseRespondWith = function(respObj) {
-    var respPromise = new Promise(function(resolve) {
-      resolve(respObj);
-    });
-
-    request = {
-      get: sinon.stub().returns(respPromise),
-      post: sinon.stub().returns(respPromise)
-    };
-    flipper = new FlipperAPI(request);
-  };
-
-
-  var requestPromiseRejectWith = function(respObj) {
-    var respPromise = new Promise(function(_, reject) {
-      reject(respObj);
-    });
-
-    request = {
-      get: sinon.stub().returns(respPromise)
-    };
-    flipper = new FlipperAPI(request);
-  };
 
 });
