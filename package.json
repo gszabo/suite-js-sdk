@@ -1,5 +1,5 @@
 {
-  "name": "suite-js-sdk",
+  "name": "suite-services-sdk",
   "version": "3.0.0-beta1",
   "description": "",
   "main": "index.js",
@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/emartech/suite-js-sdk.git"
+    "url": "https://github.com/gszabo/suite-js-sdk.git"
   },
   "author": "Viktor Somodi <viktor.somodi@emarsys.com>",
   "license": "isc",
   "bugs": {
-    "url": "https://github.com/emartech/suite-js-sdk/issues"
+    "url": "https://github.com/gszabo/suite-js-sdk/issues"
   },
   "pre-commit": [
     "code-style"
   ],
-  "homepage": "https://github.com/emartech/suite-js-sdk",
+  "homepage": "https://github.com/gszabo/suite-js-sdk",
   "dependencies": {
     "bluebird": "2.9.13",
     "co-request": "0.2.0",
