@@ -15,7 +15,7 @@ var SuiteAPI = function(options) {
   this._apiRequest = ApiRequest.create(options);
 
   this.flipper = FlipperAPI.create(this._apiRequest, options);
-  this.feature = FeatureAPI.create(this._apiRequest);
+  this.feature = FeatureAPI.create(this._apiRequest, options);
 
   this.environment = options.environment;
 };
