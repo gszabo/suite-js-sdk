@@ -20,7 +20,7 @@ _.extend(Feature.prototype, {
 
     return this._request.get(
         this._getCustomerId(options),
-        util.format('features', this._getCustomerId(options)),
+        util.format('/features'),
         options
     );
   },
@@ -32,7 +32,7 @@ _.extend(Feature.prototype, {
 
       return this._request.get(
           this._getCustomerId(options),
-          util.format('features/%s', payload.feature_id),
+          util.format('/features/%s', payload.feature_id),
           options
       );
     }.bind(this));

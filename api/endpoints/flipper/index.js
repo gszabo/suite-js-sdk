@@ -21,7 +21,7 @@ _.extend(Flipper.prototype, {
 
       return this._request.get(
           this._getCustomerId(options),
-          util.format('flippers/%s', payload.flipper_id),
+          util.format('/flippers/%s', payload.flipper_id),
           options
       );
     }.bind(this));
